@@ -28,16 +28,44 @@ Pre-requisites:
 For the required NVIDIA driver and other relevant details in that area
 please check with NVIDIA support.
 
+To build source packages (src.rpm for RPM based OS and tarball for DEB based OS), use the build_module.sh script.
+
+
+Example:
+
+    $ ./build_module.sh
+
+    Building source rpm for nvidia_peer_memory...
+    Building debian tarball for nvidia-peer-memory...
+
+    Built: /tmp/nvidia_peer_memory-1.1-0.src.rpm
+    Built: /tmp/nvidia-peer-memory_1.0.orig.tar.gz
+
+To install on RPM based OS:
+
+    # rpmbuild --rebuild /tmp/nvidia_peer_memory-1.1-0.src.rpm
+    # rpm -ivh <path to generated binary rpm file>
+
+To install on DEB based OS:
+
+    # cd /tmp
+    # tar xzf /tmp/nvidia-peer-memory_1.0.orig.tar.gz
+    # cd nvidia-peer-memory-1.0
+    # dpkg-buildpackage -us -uc
+    # dpkg -i <path to generated deb files>
+
 To install run (excluding ubuntu):
-                rpmbuild --rebuild <path to srpm>.
-                rpm -ivh <path to generated binary rpm file.> [On SLES add --nodeps].
+
+    rpmbuild --rebuild <path to srpm>.
+    rpm -ivh <path to generated binary rpm file.> [On SLES add --nodeps].
 
 To install on Ubuntu run:
-          dpkg-buildpackage -us -uc
-          dpkg -i <path to generated deb files.>
 
-		  (e.g. dpkg -i nv-peer-memory_1.0-0_all.deb
-		       dpkg -i nv-peer-memory-dkms_1.0-0_all.deb)
+    dpkg-buildpackage -us -uc
+    dpkg -i <path to generated deb files.>
+
+    (e.g. dpkg -i nvidia-peer-memory_1.1-0_all.deb
+          dpkg -i nvidia-peer-memory-dkms_1.1-0_all.deb)
 
 After successful installation:
 1)	nv_peer_mem.ko is installed
